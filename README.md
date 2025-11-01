@@ -1,53 +1,120 @@
-# Enterprise Image Fault Diagnosis & Visual Similarity Search
+# Enterprise GPU-Accelerated Visual Fault Diagnosis & Similarity Search System  
+**Deep Learning + FAISS-GPU + LLM-RAG for Industrial Defect Analysis**
+
+
 
 ## Overview
-This repository demonstrates an enterprise-ready pipeline to:
-- extract image embeddings using a pre-trained VGG16 model,
-- index embeddings with FAISS for fast similarity search,
-- train a simple classifier on the extracted embeddings to predict fault types,
-- provide a Streamlit UI to query similar images and view results.
+A production-ready reference architecture for **enterprise manufacturing fault detection**, combining:
 
-The intended workflow:
-1. Place customer-returned fault images in `data/raw/` and a `labels.csv` mapping (optional).
-2. Run `src/extract_embeddings.py` to extract and save embeddings.
-3. Run `src/build_faiss_index.py` to create and persist a FAISS index.
-4. Run `src/train_classifier.py` to train a classifier on the embeddings + labels.
-5. Use `src/query_similar_images.py` or `app/streamlit_visual_search.py` to query the index.
+- TensorFlow-GPU VGG16 classifier  
+-  FAISS-GPU similarity search index  
+-  Streamlit visual QA UI  
+-  LLM-based Fault Report Retrieval (RAG)  
+-  Automated PDF fault report ingestion  
+-  Docker + GPU compute support  
+
+#### This repo demonstrates how enterprises can leverage **vision AI + vector search + knowledge-augmented LLMs** to automate:  
+
+| Capability | Description |
+|---|---|
+Image defect classification | CNN (VGG16) trained on industrial fault dataset  
+Visual similarity search | FAISS-GPU embedding index for finding similar failed parts  
+LLM RAG fault assistance | LLM retrieves PDF maintenance reports for root-cause troubleshooting  
+Interactive UI | Streamlit search + query panel  
+Production-ready | GPU containers, config modules, modular code  
+
+---
+
+##  Architecture Overview
+
+### System Components
+| Component | Technology |
+|---|---|
+Image Preprocessing | TF Data / OpenCV  
+Feature Extraction | VGG16 (TensorFlow-GPU)  
+Vector Index | FAISS-GPU (IVF / Flat supported)  
+Search API | Python + FAISS + Fast Retrieval Pipeline  
+Knowledge Base | PDF fault reports → embeddings store  
+RAG Engine | Sentence-Transformers + FAISS + LLM responses  
+User Interface | Streamlit dashboard  
+Compute | CUDA / NVIDIA container stack  
+
+---
+
+##  High-Level Pipeline
+
+```mermaid
+flowchart LR
+A[Upload Fault Image] --> B[GPU Preprocessing]
+B --> C[VGG16 Embedding Extraction]
+C --> D[FAISS-GPU Index Search]
+D --> E[Retrieve Similar Fault Images + Labels]
+
+E --> F[LLM PDF Knowledge Retrieval]
+F --> G[Return Root Cause Analysis + Fix Steps]
 
 ## Repo structure
 ```
 enterprise-image-fault-diagnosis/
 │
-├─ data/
-│   ├─ raw/                     # customer-returned images (fault samples)
-│   ├─ processed/               # preprocessed + augmented images (optional)
-│   └─ faiss_index/             # saved FAISS index + label mappings
+├── data/
+│   ├── raw/                   
+│   ├── processed/             
+│   ├── faiss_index/           
+│   └── fault_reports/         
+│       └── vector_store/      
 │
-├─ notebooks/
-│   ├─ 01_explore_dataset.ipynb
-│   ├─ 02_train_vgg16_classifier.ipynb
-│   └─ 03_build_faiss_index.ipynb
+├── src/
+│   ├── config.py
+│   ├── extract_embeddings.py
+│   ├── train_classifier.py
+│   ├── build_faiss_index.py
+│   ├── query_similar_images.py
+│   ├── pdf_ingest.py
+│   ├── rag_query.py
 │
-├─ src/
-│   ├─ config.py
-│   ├─ extract_embeddings.py
-│   ├─ build_faiss_index.py
-│   ├─ query_similar_images.py
-│   └─ train_classifier.py
-│
-├─ app/
-│   └─ streamlit_visual_search.py
-│
-├─ requirements.txt
-├─ README.md
-└─ LICENSE
+├── app/
+│   └── streamlit_visual_search.py
+...
+
 ```
 
-## Notes
-- This project uses `VGG16` from Keras as a feature extractor. You can swap it with modern backbones (EfficientNet, ConvNeXt, ViT).
-- `faiss` is used for high-performance nearest-neighbor search. Use `faiss-gpu` for GPU acceleration.
-- Embeddings and indices are saved under `data/faiss_index/`.
-- The code includes argument parsing so you can adapt to your environment.
+## Quickstart (GPU Required)
 
-See the `src/` scripts for usage examples.
+#### <ins>Install NVIDIA stack</ins>
+
+```python
+sudo apt install nvidia-driver-530 nvidia-cuda-toolkit
+```
+
+#### <ins>Install Python deps</ins>
+
+```python
+pip install -r requirements.txt
+```
+
+#### <ins>Preprocess + Train</ins>
+```python
+python src/train_classifier.py
+python src/extract_embeddings.py
+python src/build_faiss_index.py
+```
+
+#### Launch UI
+```python
+streamlit run app/streamlit_visual_search.py
+```
+
+---
+
+## 
+| Industry | AI Use Case |
+|----------|-------------|
+| Automotive | Visual defect detection of machined parts |
+| Semiconductor | Wafer anomaly classification |
+| Aerospace | Quality control and maintenance diagnostics |
+| Energy | Turbine blade inspection & report lookup |
+| Manufacturing | Line-side failure explanation and fix guidance |S
+
+
 
