@@ -1,4 +1,4 @@
-# Enterprise GPU-Accelerated Visual Fault Diagnosis & Similarity Search System  <sub>(Deep Learning + FAISS-GPU + LLM-RAG for Industrial Defect Analysis)</sub>
+# Enterprise GPU-Accelerated Visual Fault Diagnosis & Similarity Search System  <sub>(Deep Learning + FAISS-GPU + LLM-RAG for Image based Industrial Product Defect Analysis)</sub>
 
 
 
