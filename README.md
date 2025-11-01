@@ -143,17 +143,27 @@ streamlit run app/streamlit_visual_search.py
 
 ---
 
+
+
 ## Summary
 
-#### This repo is a foundation for enterprise-grade visual AI systems combining:
+#### This repository demonstrates a real-world enterprise AI system combining:
 
-- GPU deep learning
+- Computer vision defect detection
 
-- Real-time vector search
+- GPU-accelerated similarity search
 
-- LLM-powered knowledge retrieval
+- PDF maintenance manual intelligence
 
-- Industrial fault analysis workflows
+- RAG + LLM technician assistant
+
+<ins>Perfect for</ins>:
+
+- Manufacturing AI innovation teams
+
+- Maintenance automation & smart factory projects
+
+- Industrial ML upskilling & PoC deployments
 
 - Perfect for manufacturing AI teams, digital factories, MLOps training, and innovation pilots.
 
