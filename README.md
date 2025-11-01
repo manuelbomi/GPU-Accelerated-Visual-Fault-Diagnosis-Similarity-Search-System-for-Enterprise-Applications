@@ -43,7 +43,7 @@ Compute | CUDA / NVIDIA container stack
 
 ##  High-Level Pipeline
 
-```mermaid
+```python
 flowchart LR
 A[Upload Fault Image] --> B[GPU Preprocessing]
 B --> C[VGG16 Embedding Extraction]
@@ -52,6 +52,7 @@ D --> E[Retrieve Similar Fault Images + Labels]
 
 E --> F[LLM PDF Knowledge Retrieval]
 F --> G[Return Root Cause Analysis + Fix Steps]
+```
 
 ## Repo structure
 ```
